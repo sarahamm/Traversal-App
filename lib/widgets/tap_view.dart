@@ -54,6 +54,14 @@ class _TapViewWidgetState extends State<TapViewWidget>
         .map(
           (url) => CachedNetworkImage(
             imageUrl: url,
+            imageBuilder: (context, imageProvider) => Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: imageProvider,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
             placeholder: (context, url) => CircularProgressIndicator(),
             errorWidget: (context, url, error) => Icon(Icons.error),
           ),
@@ -88,7 +96,8 @@ class _TapViewWidgetState extends State<TapViewWidget>
             padding: EdgeInsetsGeometry.all(16),
             child: Column(
               children: [
-                //Image.asset(),
+                Image(image: AssetImage(placesData[indexNum].imageUrl!)),
+                SizedBox(height: 18.0),
                 Text(
                   pageIndex(),
                   style: TextStyle(

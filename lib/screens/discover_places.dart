@@ -1,11 +1,12 @@
 import 'package:favorite_places/generated/l10n.dart';
 import 'package:favorite_places/screens/add_place.dart';
+import 'package:favorite_places/widgets/bottom_navidation_bar.dart';
 import 'package:favorite_places/widgets/card_widget.dart';
 import 'package:favorite_places/widgets/drawer_widget.dart';
 import 'package:favorite_places/widgets/search_bar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+//import 'package:shared_preferences/shared_preferences.dart';
 
 class DiscoverPlacesScreen extends StatefulWidget {
   const DiscoverPlacesScreen({super.key});
@@ -65,7 +66,7 @@ class _DiscoverPlaceScrenState extends State<DiscoverPlacesScreen> {
       ),
 
       body: Padding(
-        padding: EdgeInsetsGeometry.all(16.0),
+        padding: EdgeInsetsGeometry.only(top: 10),
         child: SingleChildScrollView(
           dragStartBehavior: DragStartBehavior.start,
           scrollDirection: Axis.vertical,
@@ -83,7 +84,7 @@ class _DiscoverPlaceScrenState extends State<DiscoverPlacesScreen> {
               ),
               Container(
                 width: 380,
-                height: 325,
+                height: 280,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/adventure.jpg'),
@@ -102,12 +103,13 @@ class _DiscoverPlaceScrenState extends State<DiscoverPlacesScreen> {
                   CardWidget(title: S().france),
                   CardWidget(title: S().thailand),
 
+                  
                   /*FutureBuilder(
                     future: readAddedPlaceInfo(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const CircularProgressIndicator();
-                      }
+                      }BottomNavidationBarWidget
 
                       return snapshot.data;
                     },
@@ -117,8 +119,11 @@ class _DiscoverPlaceScrenState extends State<DiscoverPlacesScreen> {
             ],
           ),
         ),
+        
       ),
-      floatingActionButton: FloatingActionButton(
+      
+      //bottomNavigationBar: BottomNavidationBarWidget(),
+      /*floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         child: Icon(Icons.add, color: Theme.of(context).colorScheme.surface),
         onPressed: () {
@@ -126,7 +131,8 @@ class _DiscoverPlaceScrenState extends State<DiscoverPlacesScreen> {
             context,
           ).push(MaterialPageRoute(builder: (ctx) => AddPlace()));
         },
-      ),
+      ),*/
+      
     );
   }
 }

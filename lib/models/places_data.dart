@@ -13,8 +13,8 @@ final placesData = [
       'https://images.pexels.com/photos/20659015/pexels-photo-20659015.jpeg?_gl=1*13waedy*_ga*MTU0OTA4MTAzLjE3NTMwMDgxOTA.*_ga_8JE65Q40S6*czE3NTM2OTIwNTIkbzUkZzEkdDE3NTM2OTI2NDEkajU5JGwwJGgw',
       'https://images.pexels.com/photos/31000624/pexels-photo-31000624.jpeg?_gl=1*1smtk1a*_ga*MTU0OTA4MTAzLjE3NTMwMDgxOTA.*_ga_8JE65Q40S6*czE3NTM2OTIwNTIkbzUkZzEkdDE3NTM2OTM0NDAkajU4JGwwJGgw',
       'https://images.pexels.com/photos/12954051/pexels-photo-12954051.jpeg?_gl=1*176xbpc*_ga*MTU0OTA4MTAzLjE3NTMwMDgxOTA.*_ga_8JE65Q40S6*czE3NTM2OTIwNTIkbzUkZzEkdDE3NTM2OTM3MDkkajU5JGwwJGgw',
-    ],
-    location: PlaceLocation(latitude: 41.8719, longitude: 12.5674),
+    ],//43.18930493398091, 12.182465329566362
+    location: PlaceLocation(latitude: 43.18930493398091, longitude: 12.182465329566362),
   ),
   Place(
     title: S().japan,
