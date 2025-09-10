@@ -9,7 +9,7 @@ import 'generated/l10n.dart';
 
 final colorScheme = ColorScheme.fromSeed(
   brightness: Brightness.light,
-  seedColor: const Color.fromARGB(255, 158, 202, 214),
+  seedColor: Color.fromARGB(255, 4, 102, 136),
   // ignore: deprecated_member_use
   background: const Color.fromARGB(255, 242, 242, 242),
 );
@@ -39,19 +39,20 @@ void savePlacesToDB() async {
   await DataBaseService.instance.insertFlag(S().discoverNewCulture);
   await DataBaseService.instance.insertFlag(S().vacation);
   await DataBaseService.instance.insertFlag(S().jobTrip);*/
-
+/*
  print('🔵This is Places :');
   DataBaseService.instance.printPlacesTable();
   //DataBaseService.instance.printPlacesFlagsTable();
   print('🟡This is Tags With Places :');
-  DataBaseService.instance.printPlacesTagsTable();
+  DataBaseService.instance.printPlacesTagsTable();*/
 }
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(ProviderScope(child: MyApp()));
   WidgetsFlutterBinding.ensureInitialized();
-  savePlacesToDB();
+  //savePlacesToDB();
+  //DataBaseService.instance.myDeleteDataBase();
 }
 
 class MyApp extends StatelessWidget {

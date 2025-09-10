@@ -122,7 +122,7 @@ class _DiscoverPlaceScrenState extends State<DiscoverPlacesScreen> {
         
       ),
       
-      //bottomNavigationBar: BottomNavidationBarWidget(),
+      bottomNavigationBar: BottomNavidationBarWidget(),
       /*floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         child: Icon(Icons.add, color: Theme.of(context).colorScheme.surface),

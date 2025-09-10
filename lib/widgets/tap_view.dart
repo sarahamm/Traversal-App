@@ -70,6 +70,7 @@ class _TapViewWidgetState extends State<TapViewWidget>
 
     return Scaffold(
       appBar: AppBar(
+        title: Text(widget.title, style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Michelin_bold'),),
         bottom: TabBar(
           controller: _tabcontroller,
 

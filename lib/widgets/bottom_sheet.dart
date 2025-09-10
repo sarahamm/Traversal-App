@@ -1,4 +1,5 @@
 import 'package:favorite_places/generated/l10n.dart';
+import 'package:favorite_places/main.dart';
 import 'package:favorite_places/models/data_base.dart';
 import 'package:flutter/material.dart';
 
@@ -41,7 +42,7 @@ void _loadInitialCheckState() async {
         WidgetState.focused,
       };
       if (states.any(interactiveStates.contains)) {
-        return Colors.blue;
+        return theme.colorScheme.primary;
       }
       return Colors.white;
     }
@@ -77,7 +78,7 @@ void _loadInitialCheckState() async {
                           );
                         }
                       });
-                      print('🟡This is Tags With Places :');
+                      //print('🟡This is Tags With Places :');
                       DataBaseService.instance.printPlacesTagsTable();
                     },
                   ),

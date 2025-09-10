@@ -103,7 +103,7 @@ ADD COLUMN tags TEXT''');
 ALTER TABLE $_placesTable
 ADD COLUMN flags TEXT''');
 
-    print("on UpgradeMethod //////////////");
+    //print("on UpgradeMethod //////////////");
   }
 
   Future<void> insertPlace(
@@ -113,7 +113,7 @@ ADD COLUMN flags TEXT''');
     String desc,
   ) async {
     final db = await dataBase;
-    print('⭕️⭕️⭕️');
+    //print('⭕️⭕️⭕️');
     //print(await db.query("sqlite_master"));
 
     await db.insert(_placesTable, {
@@ -121,14 +121,14 @@ ADD COLUMN flags TEXT''');
       'placeSubTitle': subtitle,
       'placeImgUrl': imageUrl,
       'placeDescription': desc,
-    }, conflictAlgorithm: ConflictAlgorithm.replace);
-    print("done adding");
+    }, conflictAlgorithm: ConflictAlgorithm.ignore);
+    //print("done adding");
   }
-
+/*
   Future<void> insertFlag(String flag) async {
     final db = await dataBase;
     await db.rawInsert('INSERT INTO flagsTable(flagName) VALUES($flag)');
-  }
+  }*/
 
   Future<void> removeTagWplace(String placeTitle, String tag) async {
     final db = await dataBase;
@@ -136,7 +136,7 @@ ADD COLUMN flags TEXT''');
     final placeid = await returnPlaceID(placeTitle);
     final tagid = await returnTagID(tag);
 
-    print("Deleting placeID: $placeid, tagID: $tagid");
+    //print("Deleting placeID: $placeid, tagID: $tagid");
 
     await db.delete(
       'placesTagsTable',
@@ -155,6 +155,7 @@ ADD COLUMN flags TEXT''');
       columns: ['placeID'],
       where: 'PlaceTitle = ?',
       whereArgs: [place],
+      
     );
 
     final placeID = getPlaceID.first['placeID'] as int;
@@ -190,9 +191,9 @@ ADD COLUMN flags TEXT''');
   }
 
   //will call it back when the user come from the drawer to see the list of places he saved
-  Future<List<Map<String, Object?>>> returnPlace(String tag) async {
+  Future<List<Map<String, Object?>>> returnPlace(String tag , int offset, int limit) async {
     final db = await dataBase;
-    final List<Map<String, Object?>> Result = [];
+    final List<Map<String, Object?>> result = [];
 
     //get tagID from the tagName//
     final tagQuery = await db.query(
@@ -200,6 +201,8 @@ ADD COLUMN flags TEXT''');
       columns: ['tagID'],
       where: 'tagName= ?',
       whereArgs: [tag],
+      limit: limit,
+      offset: offset,
     );
 
     final tagID = tagQuery.first['tagID'] as int;
@@ -223,22 +226,26 @@ ADD COLUMN flags TEXT''');
         whereArgs: [placeID],
       );
 
-      Result.addAll(placeQuery);
+      result.addAll(placeQuery);
     }
-    return Result;
+    return result;
   }
 
   Future<bool> checkTagIsExsit(String place, String tag) async {
     final db = await dataBase;
 
-    final placeid = await returnPlaceID(place);
-    final tagid = await returnTagID(tag);
+    final Place = await returnPlaceID(place);
+    final Tag = await returnTagID(tag);
+    //print("Checking placeID: $Place, tagID: $Tag");
 
     final result = await db.query(
     'placesTagsTable',
-    where: "placeID = ? AND tagID = ?",
-    whereArgs: [placeid, tagid],
+    where: "placeID AND tagID = ?",
+    whereArgs: [Place, Tag],
   );
+
+  //print("$result //////");
+
   return result.isNotEmpty;
 
   }
@@ -257,15 +264,15 @@ ADD COLUMN flags TEXT''');
   Future<void> printPlacesTagsTable() async {
     final db = await dataBase;
     final result = await db.rawQuery('SELECT * FROM placesTagsTable');
-    for (final row in result) {
-      print(row); // each row is a Map {placeID: 1, tagID: 2}
-    }
+    //for (final row in result) {
+      //print(row); // each row is a Map {placeID: 1, tagID: 2}
+    //}
   }
 
   myDeleteDataBase() async {
     final databaseDirPath = await getDatabasesPath();
     final databasePath = join(databaseDirPath, _dbFileName);
     await deleteDatabase(databasePath);
-    print("delete done");
+   // print("delete done");
   }
 }

@@ -28,7 +28,7 @@ class _PlacesListState extends ConsumerState<PlacesList> {
   Widget build(BuildContext context) {
     Widget places() {
       return FutureBuilder<List<Map<String, Object?>>>(
-        future: _dataBaseService.returnPlace(widget.title),
+        future: _dataBaseService.returnPlace(widget.title , 0,5),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());

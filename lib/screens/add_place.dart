@@ -1,5 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
-
+/*
 import 'package:favorite_places/generated/l10n.dart';
 //import 'package:favorite_places/provider/tags_provider.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +43,7 @@ class _AddPlaceState extends ConsumerState<AddPlace> {
           }),
         )
         .toList();
-    print("🟩the Pref List content : $prefList🟩");
+    //print("🟩the Pref List content : $prefList🟩");
 
     if (enteredPlace.isEmpty) {
       ScaffoldMessenger.of(
@@ -65,6 +65,14 @@ class _AddPlaceState extends ConsumerState<AddPlace> {
         return;
       }
     }
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _subTitleController.dispose();
+    _imageURLController.dispose();
+    super.dispose();
   }
 
   @override
@@ -129,3 +137,4 @@ class _AddPlaceState extends ConsumerState<AddPlace> {
     );
   }
 }
+*/

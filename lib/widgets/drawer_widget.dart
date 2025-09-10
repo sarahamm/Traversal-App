@@ -18,6 +18,12 @@ class _DrawerWidgetState extends State<DrawerWidget> with ChangeNotifier {
   List<bool> isSelected = [true, false];
   Locale locale = const Locale('ar');
 
+/*
+  @override
+  void dispose() {
+    super.dispose(); // always call super.dispose()
+  }*/
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -34,7 +40,7 @@ class _DrawerWidgetState extends State<DrawerWidget> with ChangeNotifier {
             child: Text(
               S.of(context).travel,
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                color: Colors.amberAccent,
+                color: Color.fromARGB(255, 240, 228, 127),
                 fontFamily: 'Michelin_bold',
               ),
             ),
@@ -49,6 +55,7 @@ class _DrawerWidgetState extends State<DrawerWidget> with ChangeNotifier {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (ctx) => DiscoverPlacesScreen()),
+                
               );
             },
           ),
@@ -116,7 +123,7 @@ class _DrawerWidgetState extends State<DrawerWidget> with ChangeNotifier {
               );
             },
           ),
-
+/*
           ListTile(
             leading: Icon(Icons.mobile_friendly),
             title: Text(
@@ -130,7 +137,7 @@ class _DrawerWidgetState extends State<DrawerWidget> with ChangeNotifier {
             },
           ),
           const SizedBox(height: 42.0),
-
+*/
           ListTile(
             leading: ToggleButtons(
               isSelected: isSelected,

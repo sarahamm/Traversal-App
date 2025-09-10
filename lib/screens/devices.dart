@@ -1,4 +1,4 @@
-import 'package:favorite_places/provider/fetch_internet_data.dart';
+/*import 'package:favorite_places/provider/fetch_internet_data.dart';
 import 'package:favorite_places/screens/add_place.dart';
 import 'package:favorite_places/widgets/drawer_widget.dart';
 import 'package:flutter/material.dart';
@@ -69,4 +69,4 @@ class PlacesScreenState extends ConsumerState<DevicesScreen> {
       ),
     );
   }
-}
+}*/

@@ -100,16 +100,14 @@ class _LocationWidget extends State<LocationWidget> {
         height: double.infinity,
       );
     }
-    if (_viewLocationOnMap != null) {
-      print("Herrree");
-      previweContent = Image.network(
-        locationImage,
-        fit: BoxFit.cover,
-        width: double.infinity,
-        height: double.infinity,
-      );
-    }
-    if (isGettingLocation) {
+    //print("Herrree");
+    previweContent = Image.network(
+      locationImage,
+      fit: BoxFit.cover,
+      width: double.infinity,
+      height: double.infinity,
+    );
+      if (isGettingLocation) {
       previweContent = CircularProgressIndicator();
     }
 
