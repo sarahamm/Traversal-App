@@ -11,11 +11,11 @@ final colorScheme = ColorScheme.fromSeed(
   brightness: Brightness.light,
   seedColor: const Color.fromARGB(255, 158, 202, 214),
   // ignore: deprecated_member_use
-  background: const Color.fromARGB(255, 242, 242, 242),
+  background: const Color.fromARGB(255, 246, 246, 246),
 );
 
 final theme = ThemeData().copyWith(
-  scaffoldBackgroundColor: colorScheme.onPrimaryContainer,
+  scaffoldBackgroundColor: colorScheme.background,
   colorScheme: colorScheme,
   textTheme: GoogleFonts.ubuntuCondensedTextTheme().copyWith(
     titleSmall: GoogleFonts.ubuntuCondensed(fontWeight: FontWeight.bold),
@@ -24,8 +24,7 @@ final theme = ThemeData().copyWith(
   ),
 );
 
-void savePlacesToDB() async {
-  
+savePlacesToDB() async {
   for (int i = 0; i < placesData.length; i++) {
     await DataBaseService.instance.insertPlace(
       placesData[i].title,
@@ -34,24 +33,25 @@ void savePlacesToDB() async {
       placesData[i].description!,
     );
   }
-  /*
   await DataBaseService.instance.insertFlag(S().adventure);
   await DataBaseService.instance.insertFlag(S().discoverNewCulture);
   await DataBaseService.instance.insertFlag(S().vacation);
-  await DataBaseService.instance.insertFlag(S().jobTrip);*/
-
- print('🔵This is Places :');
-  DataBaseService.instance.printPlacesTable();
-  //DataBaseService.instance.printPlacesFlagsTable();
-  print('🟡This is Tags With Places :');
-  DataBaseService.instance.printPlacesTagsTable();
+  await DataBaseService.instance.insertFlag(S().jobTrip);
+  try {
+    print('🔵This is Places :');
+    DataBaseService.instance.printPlacesTable();
+    //DataBaseService.instance.printPlacesFlagsTable();
+    print('🟡This is Tags With Places :');
+    DataBaseService.instance.printPlacesTagsTable();
+  } catch (e) {
+    print('Error initializing database: $e');
+  }
 }
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await savePlacesToDB();
   runApp(ProviderScope(child: MyApp()));
-  WidgetsFlutterBinding.ensureInitialized();
-  savePlacesToDB();
 }
 
 class MyApp extends StatelessWidget {
