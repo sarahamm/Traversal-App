@@ -1,10 +1,10 @@
 import 'package:favorite_places/generated/l10n.dart';
-import 'package:favorite_places/screens/add_place.dart';
-import 'package:favorite_places/widgets/bottom_navidation_bar.dart';
+//import 'package:favorite_places/screens/add_place.dart';
+//import 'package:favorite_places/widgets/bottom_navidation_bar.dart';
 import 'package:favorite_places/widgets/card_widget.dart';
 import 'package:favorite_places/widgets/drawer_widget.dart';
 import 'package:favorite_places/widgets/search_bar.dart';
-import 'package:flutter/gestures.dart';
+//import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,7 +18,7 @@ class DiscoverPlacesScreen extends StatefulWidget {
 }
 
 class _DiscoverPlaceScrenState extends State<DiscoverPlacesScreen> {
- /* Future readAddedPlaceInfo() async {
+  /* Future readAddedPlaceInfo() async {
     SharedPreferences readPref = await SharedPreferences.getInstance();
     String getTitle = readPref.getString("PlaceTitle") ?? "no Places added";
     String getSubTitle = readPref.getString("PlaceSubTitle") ?? "nothing";
@@ -66,62 +66,57 @@ class _DiscoverPlaceScrenState extends State<DiscoverPlacesScreen> {
       ),
 
       body: Padding(
-        padding: EdgeInsetsGeometry.only(top: 10),
-        child: SingleChildScrollView(
-          dragStartBehavior: DragStartBehavior.start,
-          scrollDirection: Axis.vertical,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Center(
-                child: Text(
-                  S.of(context).discover,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleLarge!.copyWith(fontFamily: 'Michelin_bold'),
-                ),
+        padding: const EdgeInsets.only(top: 10),
+        child: ListView(
+          children: [
+            Center(
+              child: Text(
+                S.of(context).discover,
+                style: Theme.of(
+                  context,
+                ).textTheme.titleLarge!.copyWith(fontFamily: 'Michelin_bold'),
               ),
-              Container(
-                width: 380,
-                height: 280,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/adventure.jpg'),
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-              Divider(thickness: 1, color: Colors.grey),
-              Column(
-                children: [
-                  CardWidget(title: S().italy),
-                  CardWidget(title: S().japan),
-                  CardWidget(title: S().southAfrica),
-                  CardWidget(title: S().canada),
-                  CardWidget(title: S().brazil),
-                  CardWidget(title: S().france),
-                  CardWidget(title: S().thailand),
+            ),
 
-                  
-                  /*FutureBuilder(
-                    future: readAddedPlaceInfo(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator();
-                      }BottomNavidationBarWidget
+            const SizedBox(height: 10),
 
-                      return snapshot.data;
-                    },
-                  ),*/
-                ],
+            Container(
+              width: 380,
+              height: 280,
+              decoration: BoxDecoration(
+                image: const DecorationImage(
+                  image: AssetImage('assets/adventure.jpg'),
+                  fit: BoxFit.cover,
+                ),
+                borderRadius: BorderRadius.circular(20),
               ),
-            ],
-          ),
+            ),
+
+            const Divider(thickness: 1, color: Colors.grey),
+
+            // ListView.builder inside ListView must use shrinkWrap
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: 7,
+              itemBuilder: (context, index) {
+                final titles = [
+                  S.of(context).italy,
+                  S.of(context).japan,
+                  S.of(context).southAfrica,
+                  S.of(context).canada,
+                  S.of(context).brazil,
+                  S.of(context).france,
+                  S.of(context).thailand,
+                ];
+
+                return CardWidget(title: titles[index]);
+              },
+            ),
+          ],
         ),
-        
       ),
-      
+
       //bottomNavigationBar: BottomNavidationBarWidget(),
       /*floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -132,7 +127,6 @@ class _DiscoverPlaceScrenState extends State<DiscoverPlacesScreen> {
           ).push(MaterialPageRoute(builder: (ctx) => AddPlace()));
         },
       ),*/
-      
     );
   }
 }

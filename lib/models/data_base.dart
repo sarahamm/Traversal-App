@@ -127,7 +127,9 @@ ADD COLUMN flags TEXT''');
 
   Future<void> insertFlag(String flag) async {
     final db = await dataBase;
-    await db.rawInsert('INSERT INTO flagsTable(flagName) VALUES($flag)');
+    await db.insert('flagsTable', {
+      'flagName': flag,
+    }, conflictAlgorithm: ConflictAlgorithm.ignore);
   }
 
   Future<void> removeTagWplace(String placeTitle, String tag) async {
@@ -235,12 +237,11 @@ ADD COLUMN flags TEXT''');
     final tagid = await returnTagID(tag);
 
     final result = await db.query(
-    'placesTagsTable',
-    where: "placeID = ? AND tagID = ?",
-    whereArgs: [placeid, tagid],
-  );
-  return result.isNotEmpty;
-
+      'placesTagsTable',
+      where: "placeID = ? AND tagID = ?",
+      whereArgs: [placeid, tagid],
+    );
+    return result.isNotEmpty;
   }
   //////////////////////////////////////////////////////////////////////////////
 
