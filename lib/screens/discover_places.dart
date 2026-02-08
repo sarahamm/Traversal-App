@@ -1,12 +1,11 @@
 import 'package:favorite_places/generated/l10n.dart';
-//import 'package:favorite_places/screens/add_place.dart';
-//import 'package:favorite_places/widgets/bottom_navidation_bar.dart';
+import 'package:favorite_places/screens/add_place.dart';
 import 'package:favorite_places/widgets/card_widget.dart';
 import 'package:favorite_places/widgets/drawer_widget.dart';
 import 'package:favorite_places/widgets/search_bar.dart';
 //import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-//import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DiscoverPlacesScreen extends StatefulWidget {
   const DiscoverPlacesScreen({super.key});
