@@ -1,6 +1,6 @@
 import 'dart:convert';
-
 import 'package:favorite_places/models/place.dart';
+import 'package:favorite_places/models/places_data.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:http/http.dart' as http;
@@ -18,17 +18,21 @@ class _LocationWidget extends State<LocationWidget> {
   PlaceLocation? _pickedLocation;
   var isGettingLocation = false;
   Place? place;
-  //final lat = placesData[0].location!.latitude;
-  //final lng = placesData[0].location!.latitude;
 
-  String get locationImage {
-    if (_pickedLocation == null) {
-      return '';
-    }
-    final lat = _pickedLocation!.latitude;
-    final lng = _pickedLocation!.longitude;
+  String locationImage = '';
 
-    return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat,$lng=&zoom=16&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C$lat,$lng&key=AIzaSyCKG1eZCp7f3FuPokCQ4Q27bkPe6VyUscU';
+  void _viewLocationOnMap() async {
+    final lat = placesData[0].location!.latitude;
+    final lng = placesData[0].location!.longitude;
+    setState(() {
+      locationImage =
+          'https://maps.googleapis.com/maps/api/staticmap?center=$lat,$lng&zoom=8&size=600x300&maptype=roadmap&markers=color:red%7Clabel:S%7C$lat,$lng&key=AIzaSyCKG1eZCp7f3FuPokCQ4Q27bkPe6VyUscU';
+      _pickedLocation = PlaceLocation(
+        latitude: lat,
+        longitude: lng,
+        address: 'italy',
+      );
+    });
   }
 
   void _getCurrentLocation() async {
@@ -82,7 +86,6 @@ class _LocationWidget extends State<LocationWidget> {
       );
       isGettingLocation = false;
     });
-    //print(" the address is refared to : $address");
   }
 
   @override
@@ -97,24 +100,34 @@ class _LocationWidget extends State<LocationWidget> {
         height: double.infinity,
       );
     }
+    if (_viewLocationOnMap != null) {
+      print("Herrree");
+      previweContent = Image.network(
+        locationImage,
+        fit: BoxFit.cover,
+        width: double.infinity,
+        height: double.infinity,
+      );
+    }
     if (isGettingLocation) {
       previweContent = CircularProgressIndicator();
     }
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      //mainAxisSize: MainAxisSize.max,
+      mainAxisSize: MainAxisSize.max,
       children: [
         Container(
-          height: 170.0,
+          padding: EdgeInsets.symmetric(horizontal: 24),
+          height: 290.0,
           width: double.infinity,
           alignment: Alignment.center,
+          child: Container(padding: EdgeInsetsGeometry.all(1),
           decoration: BoxDecoration(
-            border: Border.all(width: 1, color: Colors.white),
+             
           ),
-
           child: previweContent,
-        ),
+        )),
         SizedBox(height: 14),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -126,8 +139,8 @@ class _LocationWidget extends State<LocationWidget> {
               icon: Icon(Icons.location_on),
             ),
             ElevatedButton.icon(
-              onPressed: () {},
-              label: Text('select on map'),
+              onPressed: _viewLocationOnMap,
+              label: Text('View on Map'),
               icon: Icon(Icons.add_location_alt),
             ),
           ],
@@ -136,15 +149,6 @@ class _LocationWidget extends State<LocationWidget> {
     );
   }
 }
-
-
-
-
-
-// using geocoding from google api to translate the longtitude and latutiued to human readable location 
-
-
-
 
 
 /// API AIzaSyCKG1eZCp7f3FuPokCQ4Q27bkPe6VyUscU

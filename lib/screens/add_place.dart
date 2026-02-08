@@ -1,8 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:favorite_places/generated/l10n.dart';
-import 'package:favorite_places/provider/favourite_list_provider.dart';
-import 'package:favorite_places/provider/tags_provider.dart';
+//import 'package:favorite_places/provider/tags_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -53,16 +52,13 @@ class _AddPlaceState extends ConsumerState<AddPlace> {
       return;
     } else {
       try {
-        ref
-            .read(favListProvider.notifier)
-            .addPlace(enteredPlace, enteredSudTitle, enteredImageUrl);
-
+      
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("$enteredPlace ${S.of(context).fieldFilled}")),
         );
-
         Navigator.of(context).pop();
-      } catch (error) {
+      } 
+      catch (error) {
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(SnackBar(content: Text("Error")));
@@ -73,7 +69,7 @@ class _AddPlaceState extends ConsumerState<AddPlace> {
 
   @override
   Widget build(BuildContext context) {
-    final usedTags = ref.watch(usedTagsProvider);
+    //final usedTags = ref.watch(usedTagsProvider);
 
     return Scaffold(
       appBar: AppBar(title: Text('Add New Place')),
@@ -94,7 +90,7 @@ class _AddPlaceState extends ConsumerState<AddPlace> {
               decoration: InputDecoration(label: Text('Image URl')),
               controller: _imageURLController,
             ),
-
+/*
             Wrap(
               spacing: 8,
               children: usedTags.map((tag) {
@@ -117,7 +113,7 @@ class _AddPlaceState extends ConsumerState<AddPlace> {
                 );
               }).toList(),
             ),
-
+*/
             SizedBox(height: 32.0),
             ElevatedButton.icon(
               onPressed: _addFavouritePlace,
