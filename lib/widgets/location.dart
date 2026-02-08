@@ -79,6 +79,8 @@ class _LocationWidget extends State<LocationWidget> {
     final address = resData['results'][0]['formatted_address'];
 
     setState(() {
+      locationImage =
+          'https://maps.googleapis.com/maps/api/staticmap?center=$lat,$lng&zoom=8&size=600x300&maptype=roadmap&markers=color:red%7Clabel:S%7C$lat,$lng&key=AIzaSyCKG1eZCp7f3FuPokCQ4Q27bkPe6VyUscU';
       _pickedLocation = PlaceLocation(
         latitude: lat,
         longitude: lng,
@@ -92,25 +94,15 @@ class _LocationWidget extends State<LocationWidget> {
   Widget build(BuildContext context) {
     Widget previweContent = Text('No Location Choosen');
 
-    if (_pickedLocation != null) {
-      previweContent = Image.network(
-        locationImage,
-        fit: BoxFit.cover,
-        width: double.infinity,
-        height: double.infinity,
-      );
-    }
-    if (_viewLocationOnMap != null) {
-      print("Herrree");
-      previweContent = Image.network(
-        locationImage,
-        fit: BoxFit.cover,
-        width: double.infinity,
-        height: double.infinity,
-      );
-    }
     if (isGettingLocation) {
       previweContent = CircularProgressIndicator();
+    } else if (_pickedLocation != null && locationImage.isNotEmpty) {
+      previweContent = Image.network(
+        locationImage,
+        fit: BoxFit.cover,
+        width: double.infinity,
+        height: double.infinity,
+      );
     }
 
     return Column(
@@ -122,12 +114,12 @@ class _LocationWidget extends State<LocationWidget> {
           height: 290.0,
           width: double.infinity,
           alignment: Alignment.center,
-          child: Container(padding: EdgeInsetsGeometry.all(1),
-          decoration: BoxDecoration(
-             
+          child: Container(
+            padding: EdgeInsetsGeometry.all(1),
+            decoration: BoxDecoration(),
+            child: previweContent,
           ),
-          child: previweContent,
-        )),
+        ),
         SizedBox(height: 14),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
