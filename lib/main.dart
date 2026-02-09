@@ -1,6 +1,5 @@
 import 'package:favorite_places/models/data_base.dart';
 import 'package:favorite_places/models/places_data.dart';
-import 'package:favorite_places/screens/discover_places.dart';
 import 'package:favorite_places/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -39,14 +38,8 @@ savePlacesToDB() async {
   await DataBaseService.instance.insertFlag(S().vacation);
   await DataBaseService.instance.insertFlag(S().jobTrip);
   try {
-    print('🔵This is Places :');
     DataBaseService.instance.printPlacesTable();
-    //DataBaseService.instance.printPlacesFlagsTable();
-    print('🟡This is Tags With Places :');
-    DataBaseService.instance.printPlacesTagsTable();
-  } catch (e) {
-    print('Error initializing database: $e');
-  }
+  } catch (e) {}
 }
 
 void main() async {

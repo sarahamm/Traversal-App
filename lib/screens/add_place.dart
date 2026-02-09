@@ -43,7 +43,6 @@ class _AddPlaceState extends ConsumerState<AddPlace> {
           }),
         )
         .toList();
-    print("🟩the Pref List content : $prefList🟩");
 
     if (enteredPlace.isEmpty) {
       ScaffoldMessenger.of(
@@ -52,13 +51,11 @@ class _AddPlaceState extends ConsumerState<AddPlace> {
       return;
     } else {
       try {
-      
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("$enteredPlace ${S.of(context).fieldFilled}")),
         );
         Navigator.of(context).pop();
-      } 
-      catch (error) {
+      } catch (error) {
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(SnackBar(content: Text("Error")));
@@ -90,7 +87,7 @@ class _AddPlaceState extends ConsumerState<AddPlace> {
               decoration: InputDecoration(label: Text('Image URl')),
               controller: _imageURLController,
             ),
-/*
+            /*
             Wrap(
               spacing: 8,
               children: usedTags.map((tag) {

@@ -1,4 +1,3 @@
-import 'package:favorite_places/generated/l10n.dart';
 import 'package:favorite_places/widgets/bottom_sheet.dart';
 import 'package:favorite_places/widgets/location.dart';
 import 'package:flutter/material.dart';
@@ -56,10 +55,7 @@ class _TapViewWidgetState extends State<TapViewWidget>
             imageUrl: url,
             imageBuilder: (context, imageProvider) => Container(
               decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: imageProvider,
-                  fit: BoxFit.cover,
-                ),
+                image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
               ),
             ),
             placeholder: (context, url) => CircularProgressIndicator(),
@@ -69,61 +65,96 @@ class _TapViewWidgetState extends State<TapViewWidget>
         .toList();
 
     return Scaffold(
-      appBar: AppBar(
-        bottom: TabBar(
-          controller: _tabcontroller,
-
-          tabs: <Widget>[
-            Tab(
-              text: S.of(context).aboutplaceTap,
-              icon: Icon(Icons.info_outline_rounded),
-            ),
-            Tab(
-              text: S.of(context).gallaryplaceTap,
-              icon: Icon(Icons.photo_library_rounded),
-            ),
-            Tab(
-              text: S.of(context).pickLandplaceTap,
-              icon: Icon(Icons.flight_land_rounded),
-            ),
-          ],
+      body: CustomScrollView(
+        physics: const BouncingScrollPhysics(
+          parent: AlwaysScrollableScrollPhysics(),
         ),
-      ),
-      body: TabBarView(
-        controller: _tabcontroller,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsetsGeometry.all(16),
+        slivers: <Widget>[
+          SliverAppBar(
+            stretch: true,
+            onStretchTrigger: () {
+              // Function callback for stretch
+              return Future<void>.value();
+            },
+            expandedHeight: 300.0,
+            flexibleSpace: FlexibleSpaceBar(
+              stretchModes: const <StretchMode>[
+                StretchMode.zoomBackground,
+                StretchMode.blurBackground,
+                StretchMode.fadeTitle,
+              ],
+              //centerTitle: true,
+              //title: Text(widget.title),
+              background: Stack(
+                fit: StackFit.expand,
+                children: <Widget>[
+                  Image.asset(
+                    placesData[indexNum].imageUrl!,
+                    fit: BoxFit.cover,
+                  ),
+                  const DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment(0.0, 0.5),
+                        end: Alignment.center,
+                        colors: <Color>[Color(0x60000000), Color(0x00000000)],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SliverFillRemaining(
             child: Column(
               children: [
-                Image(image: AssetImage(placesData[indexNum].imageUrl!)),
-                SizedBox(height: 18.0),
-                Text(
-                  pageIndex(),
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w600,
-                    wordSpacing: 2.0,
+                TabBar(
+                  controller: _tabcontroller,
+                  tabs: const [
+                    Tab(text: 'Description'),
+                    Tab(text: 'Gallery'),
+                    Tab(text: 'Location'),
+                  ],
+                ),
+                Expanded(
+                  child: TabBarView(
+                    controller: _tabcontroller,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.all(16),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              Text(
+                                pageIndex(),
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.w600,
+                                  wordSpacing: 2.0,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      GridView.count(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 6,
+                        crossAxisSpacing: 3,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        children: <Widget>[...galleryGrid],
+                      ),
+                      Center(child: LocationWidget()),
+                    ],
                   ),
                 ),
               ],
             ),
           ),
-
-          GridView.count(
-            crossAxisCount: 2,
-            mainAxisSpacing: 6,
-            crossAxisSpacing: 3,
-
-            children: <Widget>[...galleryGrid],
-          ),
-
-          Center(child: LocationWidget()),
         ],
       ),
-
-
-      floatingActionButton:BottomSheetWidget(title: widget.title,),
+      floatingActionButton: BottomSheetWidget(title: widget.title),
     );
   }
 }

@@ -17,20 +17,20 @@ class _BottomSheetState extends State<BottomSheetWidget> {
   late String placeTitle = widget.title;
 
   @override
-void initState() {
-  super.initState();
-  _loadInitialCheckState();
-}
+  void initState() {
+    super.initState();
+    _loadInitialCheckState();
+  }
 
-void _loadInitialCheckState() async {
-  bool exists = await DataBaseService.instance.checkTagIsExsit(
-    placeTitle,
-    S().planned,
-  );
-  setState(() {
-    _isChecked = exists;
-  });
-}
+  void _loadInitialCheckState() async {
+    bool exists = await DataBaseService.instance.checkTagIsExsit(
+      placeTitle,
+      S().planned,
+    );
+    setState(() {
+      _isChecked = exists;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,8 +77,6 @@ void _loadInitialCheckState() async {
                           );
                         }
                       });
-                      print('🟡This is Tags With Places :');
-                      DataBaseService.instance.printPlacesTagsTable();
                     },
                   ),
                   CheckboxListTile(

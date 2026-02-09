@@ -102,8 +102,6 @@ ADD COLUMN tags TEXT''');
     await db.execute('''
 ALTER TABLE $_placesTable
 ADD COLUMN flags TEXT''');
-
-    print("on UpgradeMethod //////////////");
   }
 
   Future<void> insertPlace(
@@ -113,8 +111,6 @@ ADD COLUMN flags TEXT''');
     String desc,
   ) async {
     final db = await dataBase;
-    print('⭕️⭕️⭕️');
-    //print(await db.query("sqlite_master"));
 
     await db.insert(_placesTable, {
       'PlaceTitle': title,
@@ -122,7 +118,6 @@ ADD COLUMN flags TEXT''');
       'placeImgUrl': imageUrl,
       'placeDescription': desc,
     }, conflictAlgorithm: ConflictAlgorithm.replace);
-    print("done adding");
   }
 
   Future<void> insertFlag(String flag) async {
@@ -137,8 +132,6 @@ ADD COLUMN flags TEXT''');
 
     final placeid = await returnPlaceID(placeTitle);
     final tagid = await returnTagID(tag);
-
-    print("Deleting placeID: $placeid, tagID: $tagid");
 
     await db.delete(
       'placesTagsTable',
@@ -194,7 +187,7 @@ ADD COLUMN flags TEXT''');
   //will call it back when the user come from the drawer to see the list of places he saved
   Future<List<Map<String, Object?>>> returnPlace(String tag) async {
     final db = await dataBase;
-    final List<Map<String, Object?>> Result = [];
+    final List<Map<String, Object?>> result = [];
 
     //get tagID from the tagName//
     final tagQuery = await db.query(
@@ -214,7 +207,6 @@ ADD COLUMN flags TEXT''');
       whereArgs: [tagID],
     );
 
-    //convert **each** placeID to place title
     for (final row in placeIDQuery) {
       final placeID = row['placeID'] as int;
 
@@ -225,9 +217,9 @@ ADD COLUMN flags TEXT''');
         whereArgs: [placeID],
       );
 
-      Result.addAll(placeQuery);
+      result.addAll(placeQuery);
     }
-    return Result;
+    return result;
   }
 
   Future<bool> checkTagIsExsit(String place, String tag) async {
@@ -255,18 +247,9 @@ ADD COLUMN flags TEXT''');
     await db.rawQuery('SELECT * FROM placesFlagsTable');
   }*/
 
-  Future<void> printPlacesTagsTable() async {
-    final db = await dataBase;
-    final result = await db.rawQuery('SELECT * FROM placesTagsTable');
-    for (final row in result) {
-      print(row); // each row is a Map {placeID: 1, tagID: 2}
-    }
-  }
-
   myDeleteDataBase() async {
     final databaseDirPath = await getDatabasesPath();
     final databasePath = join(databaseDirPath, _dbFileName);
     await deleteDatabase(databasePath);
-    print("delete done");
   }
 }

@@ -1,6 +1,4 @@
 import 'package:favorite_places/generated/l10n.dart';
-import 'package:favorite_places/screens/add_place.dart';
-import 'package:favorite_places/widgets/bottom_navidation_bar.dart';
 import 'package:favorite_places/widgets/card_widget.dart';
 import 'package:favorite_places/widgets/drawer_widget.dart';
 import 'package:favorite_places/widgets/image_crousel.dart';
@@ -30,10 +28,12 @@ class _DiscoverPlaceScrenState extends State<DiscoverPlacesScreen> {
               onPressed: () {},
               icon: Icon(Icons.flight_takeoff_rounded),
             ),
+
             Text(
               "Traversal",
               style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
             ),
+            Spacer(),
           ],
         ),
       ),
@@ -106,11 +106,13 @@ class _DiscoverPlaceScrenState extends State<DiscoverPlacesScreen> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.center,
+
                     children: [
                       Text(
-                        "Explore Cities",
+                        "Explore Countries",
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
+                      Spacer(),
                       IconButton(onPressed: () {}, icon: Icon(Icons.tune)),
                     ],
                   ),
@@ -140,16 +142,6 @@ class _DiscoverPlaceScrenState extends State<DiscoverPlacesScreen> {
           ],
         ),
       ),
-
-      /*floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).colorScheme.secondary,
-        child: Icon(Icons.add, color: Theme.of(context).colorScheme.surface),
-        onPressed: () {
-          Navigator.of(
-            context,
-          ).push(MaterialPageRoute(builder: (ctx) => AddPlace()));
-        },
-      ),*/
     );
   }
 }

@@ -12,8 +12,7 @@ class CrouselPageViewWidghet extends StatefulWidget {
 class _CrouselPageViewState extends State<CrouselPageViewWidghet> {
   final List<String> images = [
     'assets/adventure.jpg',
-    'assets/japan.jpg',
-    'assets/italy.jpg',
+    'assets/greece.jpg',
     'assets/south_africa.jpg',
   ];
 
