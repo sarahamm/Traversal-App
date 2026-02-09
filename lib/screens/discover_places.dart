@@ -1,5 +1,6 @@
 import 'package:favorite_places/generated/l10n.dart';
 import 'package:favorite_places/screens/add_place.dart';
+import 'package:favorite_places/widgets/bottom_navidation_bar.dart';
 import 'package:favorite_places/widgets/card_widget.dart';
 import 'package:favorite_places/widgets/drawer_widget.dart';
 import 'package:favorite_places/widgets/image_crousel.dart';
@@ -93,7 +94,7 @@ class _DiscoverPlaceScrenState extends State<DiscoverPlacesScreen> {
 
             //const Divider(thickness: 1, color: Colors.grey),
             Container(
-              margin: EdgeInsetsGeometry.all(12),
+              margin: EdgeInsets.all(12),
               padding: EdgeInsets.all(4),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.black87, width: 1),
@@ -140,7 +141,6 @@ class _DiscoverPlaceScrenState extends State<DiscoverPlacesScreen> {
         ),
       ),
 
-      //bottomNavigationBar: BottomNavidationBarWidget(),
       /*floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         child: Icon(Icons.add, color: Theme.of(context).colorScheme.surface),

@@ -25,7 +25,7 @@ class UserFavoritePlacesState extends State<UserFavoritePlacesScreen> {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: EdgeInsetsGeometry.all(20),
+          padding: EdgeInsets.all(20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

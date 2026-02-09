@@ -27,13 +27,18 @@ class _CardWidgetState extends ConsumerState<CardWidget> {
     final place = placesData[index];
 
     return Card(
-      clipBehavior: Clip.hardEdge,
+      clipBehavior: Clip.antiAlias,
       child: ListTile(
-        leading: Image(
-          width: 120,
+        leading: Container(
+          width: 100,
           height: 120,
-          fit: BoxFit.fill,
-          image: AssetImage(place.imageUrl!),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4),
+            image: DecorationImage(
+              fit: BoxFit.fill,
+              image: AssetImage(place.imageUrl!),
+            ),
+          ),
         ),
         onTap: () {
           Navigator.of(context).push(
@@ -46,11 +51,13 @@ class _CardWidgetState extends ConsumerState<CardWidget> {
 
         title: Text(
           place.title,
-          style: Theme.of(context).textTheme.titleMedium,
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
           place.subTitle!,
-          style: Theme.of(context).textTheme.bodyMedium,
+          style: Theme.of(context).textTheme.labelLarge,
         ),
       ),
     );
