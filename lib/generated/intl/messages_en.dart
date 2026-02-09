@@ -29,7 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "brazil_subTitle": MessageLookupByLibrary.simpleMessage(
       "Carnivals, beaches, and rainforest adventures",
     ),
-    "discover": MessageLookupByLibrary.simpleMessage("DISCOVE NEW PLACES"),
+    "discover": MessageLookupByLibrary.simpleMessage("DISCOVER NEW PLACES"),
     "discover_new_culture": MessageLookupByLibrary.simpleMessage(
       "Discover New Culture",
     ),

@@ -59,10 +59,10 @@ class S {
     );
   }
 
-  /// `DISCOVE NEW PLACES`
+  /// `DISCOVER NEW PLACES`
   String get discover {
     return Intl.message(
-      'DISCOVE NEW PLACES',
+      'DISCOVER NEW PLACES',
       name: 'discover',
       desc: '',
       args: [],
