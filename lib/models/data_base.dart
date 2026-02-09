@@ -117,7 +117,7 @@ ADD COLUMN flags TEXT''');
       'placeSubTitle': subtitle,
       'placeImgUrl': imageUrl,
       'placeDescription': desc,
-    }, conflictAlgorithm: ConflictAlgorithm.replace);
+    }, conflictAlgorithm: ConflictAlgorithm.ignore);
   }
 
   Future<void> insertFlag(String flag) async {
@@ -239,7 +239,11 @@ ADD COLUMN flags TEXT''');
 
   Future<void> printPlacesTable() async {
     final db = await dataBase;
-    await db.rawQuery('SELECT * FROM $_placesTable');
+    final result = await db.rawQuery('SELECT * FROM $_placesTable');
+    print('Places Table Data:');
+    for (var row in result) {
+      print(row);
+    }
   }
 
   /*Future<void> printPlacesFlagsTable() async {

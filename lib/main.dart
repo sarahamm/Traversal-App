@@ -25,6 +25,7 @@ final theme = ThemeData().copyWith(
 );
 
 savePlacesToDB() async {
+  print("Starting to save places to DB");
   for (int i = 0; i < placesData.length; i++) {
     await DataBaseService.instance.insertPlace(
       placesData[i].title,
@@ -38,11 +39,14 @@ savePlacesToDB() async {
   await DataBaseService.instance.insertFlag(S().vacation);
   await DataBaseService.instance.insertFlag(S().jobTrip);
   try {
-    DataBaseService.instance.printPlacesTable();
-  } catch (e) {}
+    await DataBaseService.instance.printPlacesTable();
+    print("Finished saving places to DB");
+  } catch (e) {
+    print("Error in printPlacesTable: $e");
+  }
 }
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await savePlacesToDB();
   runApp(ProviderScope(child: MyApp()));

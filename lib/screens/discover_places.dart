@@ -20,10 +20,13 @@ class _DiscoverPlaceScrenState extends State<DiscoverPlacesScreen> {
     return Scaffold(
       drawer: DrawerWidget(),
       appBar: AppBar(
+        centerTitle: true,
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          //mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
+          //mainAxisSize: MainAxisSize.min,
           children: [
+            SizedBox(width: 38),
             IconButton(
               onPressed: () {},
               icon: Icon(Icons.flight_takeoff_rounded),
@@ -95,7 +98,7 @@ class _DiscoverPlaceScrenState extends State<DiscoverPlacesScreen> {
             //const Divider(thickness: 1, color: Colors.grey),
             Container(
               margin: EdgeInsets.all(12),
-              padding: EdgeInsets.all(4),
+              padding: EdgeInsets.all(12),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.black87, width: 1),
                 borderRadius: BorderRadius.all(Radius.circular(12)),
